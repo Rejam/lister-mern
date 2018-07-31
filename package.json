@@ -1,0 +1,13 @@
+{
+  "name": "lister-mern",
+  "version": "1.0.0",
+  "description": "A list app",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "start": "npm run client | npm run server"
+  },
+  "author": "Ryan James",
+  "license": "MIT"
+}
