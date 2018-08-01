@@ -1,9 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default props =>
-  <div>
-    <h1>Lister App</h1>
-    <Link to="/">Home</Link>
-    <Link to="/lists">All</Link>
-  </div>
+class AppHeader extends React.Component {
+
+  componentDidMount() {
+    
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Lister App</h1>
+        <Link to="/">Home</Link>
+        <Link to="/lists">All</Link>
+      </div>
+    )
+  }
+}
+
+export default AppHeader
