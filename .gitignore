@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# keys
+*config.js
+
 # production
 *build
 

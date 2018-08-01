@@ -1,5 +1,5 @@
 # API
-## Lists
+## Lists /lists
 Name    | Method  | URL         | Desc 
 ---     |---      |---          |---
 *Index  | GET     | /           | show all lists
@@ -22,7 +22,7 @@ list { }
   }
 ```
 
-## Items /:id
+## Items /lists/:id
 Name    | Method      | URL         | Desc
 ---     |---          |---          |---
 New     | GET         | /new        | new item
