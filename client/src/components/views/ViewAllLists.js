@@ -1,5 +1,5 @@
 import React from 'react'
-import api from '../../services/listAPI'
+import { fetchLists } from '../../services/listAPI'
 import { Link } from 'react-router-dom'
 
 class ViewAllLists extends React.Component {
@@ -11,11 +11,8 @@ class ViewAllLists extends React.Component {
   }
 
   fetchLists = () => {
-    api.fetchLists()
-      .then(lists => {
-        console.log("ERROR")
-        this.setState({ lists })
-      })
+    fetchLists()
+      .then(lists => this.setState({ lists }))
       .catch(err => console.log(err))
   }
   render() {

@@ -1,5 +1,5 @@
 import React from 'react'
-import api from '../../services/listAPI'
+import { fetchAList } from '../../services/listAPI'
 
 class ViewList extends React.Component {
   state = { list: {
@@ -12,7 +12,7 @@ class ViewList extends React.Component {
   }
 
   fetchList = () => {
-    api.fetchList(this.props.match.params.id)
+    fetchAList(this.props.match.params.id)
       .then(list => this.setState({ list }))
   }
 
