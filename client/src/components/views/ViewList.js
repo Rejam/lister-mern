@@ -1,25 +1,18 @@
 import React from 'react'
-import { fetchAList } from '../../services/listAPI'
+import { fetchCurrentList } from '../../actions/fetchCurrentList'
+import { connect } from 'react-redux'
 
 class ViewList extends React.Component {
-  state = { list: {
-    items: [],
-    name: ""
-  } }
 
   componentDidMount() {
-    this.fetchList()
-  }
-
-  fetchList = () => {
-    fetchAList(this.props.match.params.id)
-      .then(list => this.setState({ list }))
+    this.props.fetchCurrentList(this.props.match.params.id)
   }
 
   render() {
 
-    const { list } = this.state
-    return(
+    const { list } = this.props
+    const RenderList = ({list}) =>
+      list.items ?
       <div>
         <h3>{ list.name }</h3>
         {
@@ -29,9 +22,19 @@ class ViewList extends React.Component {
           </div>
           )
         }
+      </div> :
+      <h3>Loading</h3>
+
+    return(
+      <div>
+        <RenderList list={list} />
       </div>
     )
   }
 }
 
-export default ViewList
+const mapStateToProps = ({ currentList }) => ({
+    list: currentList
+  })
+
+export default connect(mapStateToProps, { fetchCurrentList })(ViewList)

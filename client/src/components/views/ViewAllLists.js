@@ -1,22 +1,16 @@
 import React from 'react'
-import { fetchLists } from '../../services/listAPI'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchAllLists } from '../../actions/fetchLists'
 
 class ViewAllLists extends React.Component {
 
-  state = { lists: [] }
-
   componentDidMount() {
-    this.fetchLists()
+    this.props.fetchAllLists()
   }
 
-  fetchLists = () => {
-    fetchLists()
-      .then(lists => this.setState({ lists }))
-      .catch(err => console.log(err))
-  }
   render() {
-    const { lists } = this.state
+    const { lists } = this.props
     return (
       <div>
         <h2>Show all lists</h2>
@@ -34,4 +28,6 @@ class ViewAllLists extends React.Component {
   }
 }
 
-export default ViewAllLists
+const mapStateToProps = ({lists}) => ({lists})
+
+export default connect(mapStateToProps, { fetchAllLists })(ViewAllLists)

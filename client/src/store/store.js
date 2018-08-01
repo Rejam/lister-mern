@@ -1,13 +1,13 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import reduxPromise from 'redux-promise'
 import reducer from '../reducers'
 
 const initialState = {
-  current: null,
+  currentList: {},
   lists: [],
-  user: null
 }
 
-const middleware = applyMiddleware(reduxPromise)
-
-export default createStore(reducer, initialState, middleware)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default createStore(reducer, initialState, composeEnhancers(
+  applyMiddleware(reduxPromise)
+))

@@ -1,8 +1,13 @@
-import { CHANGE_CURRENT } from '../actions/types'
+import { FETCH_A_LIST } from '../actions/types'
 
-const currentListReducer = (state = "", action) => {
-  if(action.type === CHANGE_CURRENT) {
-    return action.payload
+const currentListReducer = (state = {}, action) => {
+  switch(action.type){
+    case(FETCH_A_LIST):
+      return action.payload
+    
+    default:
+      return state
   }
-  return state
 }
+
+export default currentListReducer
