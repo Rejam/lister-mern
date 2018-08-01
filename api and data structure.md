@@ -15,10 +15,8 @@ lists [ ]
 list { }
 ```
   _id: {
-    id: String,
     name: String,
     items: [],
-    date: Date.now(),
   }
 ```
 
@@ -36,9 +34,8 @@ items [ ]
 item { }
 ```
   _id: {
-    id: String,
     name: String,
-    date: Date.now()
+    from: ObjectId
   }
 ```
 
@@ -54,10 +51,8 @@ users [ ]
 user { }
 ```
   _id: {
-    id: String,
     username: String,
-    lists: []
-    date: Date.now(),
+    password: String
   }
 ```
 

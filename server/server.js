@@ -21,8 +21,8 @@ mongoose
   .catch(err => console.error(err))
 
 // Routes
-const list_routes = require('./routes/lists')
-app.use('/lists', list_routes)
+const list = require('./routes/routes_list')
+app.use('/lists', list)
 
 
 // Server config
