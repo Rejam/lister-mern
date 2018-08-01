@@ -17,6 +17,7 @@ list { }
   _id: {
     name: String,
     items: [],
+    owner: ObjectId
   }
 ```
 
@@ -35,7 +36,7 @@ item { }
 ```
   _id: {
     name: String,
-    from: ObjectId
+    list: ObjectId
   }
 ```
 

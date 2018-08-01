@@ -22,7 +22,9 @@ mongoose
 
 // Routes
 const list = require('./routes/routes_list')
+const item = require('./routes/routes_item')
 app.use('/lists', list)
+app.use('/lists/:id', item)
 
 
 // Server config
