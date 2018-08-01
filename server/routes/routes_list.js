@@ -4,6 +4,7 @@ const List = require('../models/model_list')
 // GET / Show all
 router.get('/', (req, res) => {
   List.find({})
+    .populate('items').exec()
     .then(lists => res.json(lists))
     .catch(err => console.error(err))
 })
@@ -11,6 +12,7 @@ router.get('/', (req, res) => {
 // GET /:id Show one
 router.get('/:id', (req, res) => {
   List.findById(req.params.id)
+    .populate('items').exec()
     .then(list => res.json(list))
     .catch(err => console.error(err))
 })
