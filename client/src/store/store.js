@@ -3,7 +3,6 @@ import reduxPromise from 'redux-promise'
 import reducer from '../reducers'
 
 const initialState = {
-  currentList: {},
   lists: [],
 }
 

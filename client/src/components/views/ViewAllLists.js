@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchAllLists } from '../../actions/fetchLists'
+import { fetchAllLists } from '../../actions'
 
 class ViewAllLists extends React.Component {
 
