@@ -1,12 +1,13 @@
 import React from 'react'
+import PropTypes from "prop-types";
 
-const ViewList = ({list}) => 
-  !list ?
+const ViewList = ({name, items}) => 
+  !name ?
     <div>Loading</div> :
     <div>
-      <h3>{ list.name }</h3>
+      <h3>{ name }</h3>
       {
-        list.items.map(i => 
+        items.map(i => 
           <div key={i._id}>
         {i.name}
         </div>
@@ -14,4 +15,11 @@ const ViewList = ({list}) =>
       }
     </div>
 
+ViewList.propTypes = {
+  name: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired
+}
 export default ViewList

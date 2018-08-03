@@ -1,9 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const ViewAllLists = props => {
-  const { lists: { byId, allIds} } = props
-  return (
+const ViewAllLists = ({ byId, allIds }) =>
   <div>
     <h2>Show all lists</h2>
     {
@@ -16,7 +15,16 @@ const ViewAllLists = props => {
       </div>)
     }
   </div>
-  )
-}
 
+ViewAllLists.propTypes = {
+  
+  byId: PropTypes.objectOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    items: PropTypes.array.isRequired
+  }).isRequired)
+  .isRequired,
+  
+  allIds: PropTypes.arrayOf(PropTypes.string).isRequired
+}
 export default ViewAllLists

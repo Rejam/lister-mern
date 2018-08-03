@@ -3,8 +3,10 @@ import ViewList from '../components/ViewList'
 
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps.match.params
+  const list = state.lists.byId[id] || {name:"", items:[]}
   return {
-    list: state.lists.byId[id]
+    name: list.name,
+    items: list.items
   }
 }
 
