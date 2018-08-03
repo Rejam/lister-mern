@@ -1,5 +1,5 @@
 import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from './types'
-import { fetch } from '../api/fetch'
+import { fetchData } from '../api'
 
 const fetchBegin = () => (
   {
@@ -24,7 +24,7 @@ const fetchFailure = error => (
 const fetchLists = () => dispatch => {
   dispatch(fetchBegin())
   
-  fetch()
+  fetchData()
     .then(res => res.data)
     .then(lists => {
 
