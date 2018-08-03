@@ -1,14 +1,15 @@
-import { FETCH_LISTS, FETCH_A_LIST } from '../actions/types'
+import { FETCH_SUCCESS } from '../actions/types'
 
-const listReducer = (state = [], action) => {
+const initialState = {
+  byId: {},
+  allIds: []
+}
+
+const listReducer = (state = initialState, action) => {
   switch(action.type) {
 
-    case(FETCH_LISTS):
+    case(FETCH_SUCCESS):
       return action.payload
-
-    case(FETCH_A_LIST):
-      const exists = state.findIndex(l => l._id === action.payload._id) > 0
-      return [action.payload] //exists ? state : [action.payload, ...state] 
 
     default:
       return state

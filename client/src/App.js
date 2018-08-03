@@ -4,13 +4,18 @@ import {
   Route,
   Switch 
 } from 'react-router-dom'
-import AppHeader from './AppHeader'
-import AppFooter from './AppFooter'
-import Home from './views/Home'
-import ViewAllLists from './views/ViewAllLists'
-import ViewList from './views/ViewList'
+import AppHeader from './components/AppHeader'
+import AppFooter from './components/AppFooter'
+import Home from './components/Home'
+import Lists from './containers/Lists'
+import List from './containers/List'
+import { fetchLists } from './actions'
   
 class App extends Component {
+
+  componentDidMount(){
+    this.props.store.dispatch(fetchLists())
+  }
   render() {
     return (
       <div className="App">
@@ -20,10 +25,10 @@ class App extends Component {
                 <Switch>
                   <Route 
                     path='/lists/:id' 
-                    component={ViewList} />
+                    component={List} />
                   <Route 
                     path='/lists' 
-                    component={ViewAllLists} />
+                    component={Lists} />
                   <Route 
                     path='/' 
                     component={Home} />

@@ -1,13 +1,48 @@
-import { FETCH_LISTS, FETCH_A_LIST } from './types'
-import { apiFetchLists, apiFetchAList } from '../services/listAPI'
+import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from './types'
+import { fetch } from '../api/fetch'
 
-export const fetchAllLists = () => ({
-  type: FETCH_LISTS,
-  payload: apiFetchLists()
-})
+const fetchBegin = () => (
+  {
+    type: FETCH_BEGIN
+  }
+)
 
-export const fetchCurrentList = id => ({
-  type: FETCH_A_LIST,
-  payload: apiFetchAList(id)
-})
+const fetchSuccess = payload => (
+  {
+    type: FETCH_SUCCESS,
+    payload
+  }
+)
+
+const fetchFailure = error => (
+  {
+    type: FETCH_FAILURE,
+    error
+  }
+)
+
+const fetchLists = () => dispatch => {
+  dispatch(fetchBegin())
+  
+  fetch()
+    .then(res => res.data)
+    .then(lists => {
+
+      // restructure data for store
+      const byId = lists.reduce((obj, list) =>
+        ({...obj, [list._id]: list}), {})
+      const allIds = lists.map(l => l._id)
+      dispatch(fetchSuccess({
+        allIds,
+        byId
+      }))
+    })
+
+    // dispatch fetch failure action
+    .catch(err => dispatch(fetchFailure(err.message)))
+}
+
+export { fetchLists }
+
+
 
