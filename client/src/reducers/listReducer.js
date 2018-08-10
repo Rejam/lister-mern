@@ -1,4 +1,4 @@
-import { FETCH_SUCCESS } from '../actions/types'
+import { FETCH_SUCCESS } from '../actions/fetch_actions'
 
 const initialState = {
   byId: {},

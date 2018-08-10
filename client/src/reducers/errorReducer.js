@@ -1,4 +1,4 @@
-import { FETCH_FAILURE, FETCH_BEGIN, FETCH_SUCCESS } from "../actions/types";
+import { FETCH_FAILURE, FETCH_BEGIN, FETCH_SUCCESS } from "../actions/fetch_actions";
 
 const initialState = {
   hasError: false,

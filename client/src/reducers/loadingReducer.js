@@ -1,4 +1,4 @@
-import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from "../actions/types";
+import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from "../actions/fetch_actions";
 
 const loadingReducer = (isLoading=true, action) => {
   switch(action.type) {

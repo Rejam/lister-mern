@@ -1,4 +1,7 @@
-import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from './types'
+export const 
+  FETCH_BEGIN = "FETCH_BEGIN",
+  FETCH_SUCCESS = "FETCH_SUCCESS",
+  FETCH_FAILURE = "FETCH_FAILURE"
 
 const fetchBegin = () => (
   {

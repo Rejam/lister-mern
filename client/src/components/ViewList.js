@@ -25,7 +25,11 @@ ViewList.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   })).isRequired,
-  isLoading: PropTypes.bool
+}
+
+ViewList.defaultProps = {
+  name: '',
+  items: [],
 }
 
 export default ViewList

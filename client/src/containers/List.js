@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { connect } from 'react-redux'
 import ViewList from '../components/ViewList'
 
