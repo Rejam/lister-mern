@@ -1,5 +1,4 @@
 import { FETCH_BEGIN, FETCH_SUCCESS, FETCH_FAILURE } from './types'
-import { fetchData } from '../api'
 
 const fetchBegin = () => (
   {
@@ -23,11 +22,9 @@ const fetchFailure = error => (
 
 const fetchLists = () => dispatch => {
   dispatch(fetchBegin())
-  
-  fetchData()
-    .then(res => res.data)
+  return fetch('/lists')
+    .then(res => res.json())
     .then(lists => {
-
       // restructure data for store
       const byId = lists.reduce((obj, list) =>
         ({...obj, [list._id]: list}), {})
@@ -39,7 +36,7 @@ const fetchLists = () => dispatch => {
     })
 
     // dispatch fetch failure action
-    .catch(err => dispatch(fetchFailure(err.message)))
+    .catch(() => dispatch(fetchFailure('Unable to fetch data')))
 }
 
 export { fetchLists }

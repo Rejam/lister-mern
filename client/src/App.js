@@ -10,29 +10,40 @@ import Home from './components/Home'
 import Lists from './containers/Lists'
 import List from './containers/List'
 import { fetchLists } from './actions'
+import {connect} from 'react-redux'
   
 class App extends Component {
-
-  componentDidMount(){
-    this.props.store.dispatch(fetchLists())
+  componentDidMount() {
+    this.props.fetchLists()
   }
+
   render() {
+    const Routes = () =>
+      <Switch>
+        <Route 
+          path='/lists/:id' 
+          component={List} />
+        <Route 
+          path='/lists' 
+          component={Lists} />
+        <Route 
+          path='/' 
+          component={Home} />
+      </Switch>
+
+    const {isLoading, error} = this.props
     return (
       <div className="App">
           <Router>
               <div>
                 <AppHeader />
-                <Switch>
-                  <Route 
-                    path='/lists/:id' 
-                    component={List} />
-                  <Route 
-                    path='/lists' 
-                    component={Lists} />
-                  <Route 
-                    path='/' 
-                    component={Home} />
-                </Switch>
+                { error.hasError ?
+                    <p>{error.msg}</p> :
+                    
+                    isLoading ?
+                      <p>Fetching data</p> :
+                    <Routes />
+                }
               </div>
           </Router>
         <AppFooter />
@@ -41,4 +52,9 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({isLoading, error}) => ({
+  error,
+  isLoading
+})
+
+export default connect(mapStateToProps, { fetchLists })(App)
