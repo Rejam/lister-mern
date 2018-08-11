@@ -1,24 +1,25 @@
-export const 
-  FETCH_BEGIN = "FETCH_BEGIN",
-  FETCH_SUCCESS = "FETCH_SUCCESS",
-  FETCH_FAILURE = "FETCH_FAILURE"
+export const fetch_actions = {
+  FETCH_BEGIN: "FETCH_BEGIN",
+  FETCH_SUCCESS: "FETCH_SUCCESS",
+  FETCH_FAILURE: "FETCH_FAILURE"
+}
 
 const fetchBegin = () => (
   {
-    type: FETCH_BEGIN
+    type: fetch_actions.FETCH_BEGIN
   }
 )
 
 const fetchSuccess = payload => (
   {
-    type: FETCH_SUCCESS,
+    type: fetch_actions.FETCH_SUCCESS,
     payload
   }
 )
 
 const fetchFailure = error => (
   {
-    type: FETCH_FAILURE,
+    type: fetch_actions.FETCH_FAILURE,
     error
   }
 )

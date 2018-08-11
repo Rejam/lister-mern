@@ -1,4 +1,4 @@
-import { FETCH_FAILURE, FETCH_BEGIN, FETCH_SUCCESS } from "../actions/fetch_actions";
+import { fetch_actions } from "../actions/fetch_actions";
 
 const initialState = {
   hasError: false,
@@ -7,13 +7,13 @@ const initialState = {
 
 const errorReducer = (state= initialState, action) => {
   switch(action.type) {
-    case FETCH_FAILURE:
+    case fetch_actions.FETCH_FAILURE:
       return {
         hasError: true,
         msg: action.error
       }
-    case FETCH_BEGIN:
-    case FETCH_SUCCESS:
+    case fetch_actions.FETCH_BEGIN:
+    case fetch_actions.FETCH_SUCCESS:
       return {
         hasError: false,
         msg: ""

@@ -5,7 +5,7 @@ import AppFooter from './components/AppFooter'
 import AppRoutes from './components/AppRoutes'
 import { fetchLists } from './actions/fetch_actions'
 import {connect} from 'react-redux'
-  
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchLists()
