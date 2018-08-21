@@ -7,7 +7,10 @@ const Item = require("../models/model_item");
 router.post("/", (req, res) => {
   List.findById(req.params.id)
     .then(list => {
-      const newItem = { name: req.body.name };
+      const newItem = {
+        title: req.body.title,
+        content: req.body.content
+      };
       Item.create(newItem)
         .then(item => {
           list.items.push(item);

@@ -26,10 +26,9 @@ const addItemFailure = error => ({
 });
 
 export const addItem = (newItem, list_id) => dispatch => {
-  console.log(newItem, list_id);
   dispatch(addItemRequest());
   axios
-    .post(`/lists/${list_id}`, { name: newItem })
+    .post(`/lists/${list_id}`, newItem)
     .then(res => {
       const newItem = res.data;
       dispatch(addItemSuccess(newItem, list_id));
@@ -38,10 +37,25 @@ export const addItem = (newItem, list_id) => dispatch => {
 };
 
 // delete item actions
-// const deleteItemRequest = () => {};
-// const deleteItemSuccess = () => {};
-// const deleteItemFailure = () => {};
+const deleteItemRequest = () => ({
+  type: item_actions.DELETE_ITEM_REQUEST
+});
 
-// const deleteItem = (item, list) => dispatch => {
-//   dispatch(deleteItemRequest());
-// };
+const deleteItemSuccess = (item, list_id) => ({
+  type: item_actions.DELETE_ITEM_SUCCESS,
+  item,
+  list_id
+});
+
+const deleteItemFailure = error => ({
+  type: item_actions.DELETE_ITEM_FAILURE,
+  error
+});
+
+export const deleteItem = (item, list_id) => dispatch => {
+  dispatch(deleteItemRequest());
+  axios
+    .delete(`/lists/${list_id}/${item._id}`)
+    .then(item => dispatch(deleteItemSuccess(item, list_id)))
+    .catch(err => dispatch(deleteItemFailure(err)));
+};

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ViewAllLists from "../components/ViewAllLists";
-import { createList } from "../actions/list_actions";
+import { createList, deleteList } from "../actions/list_actions";
 import { withRouter } from "react-router-dom";
 
 const mapStateToProps = state => ({
@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const Lists = connect(
   mapStateToProps,
-  { createList }
+  { createList, deleteList }
 )(withRouter(ViewAllLists));
 
 export default Lists;

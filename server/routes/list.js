@@ -23,7 +23,7 @@ router.get("/:id", (req, res) => {
 // POST /lists
 router.post("/", (req, res) => {
   List.create({
-    name: req.body.name
+    title: req.body.title
   })
     .then(list => res.json(list))
     .catch(_ => res.status(404).json({ error: "Could not create list" }));

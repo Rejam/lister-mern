@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
 const listSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     required: true
+  },
+  icon: {
+    type: String,
+    default: "list"
   },
   items: [
     {

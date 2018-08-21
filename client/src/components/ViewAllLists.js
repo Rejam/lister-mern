@@ -1,51 +1,91 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { deleteList } from "../actions/list_actions";
 
-const ViewAllLists = ({ byId, allIds, createList }) => {
-
+const ViewAllLists = ({ byId, allIds, createList, deleteList }) => {
   const handleSubmit = e => {
-    e.preventDefault()
-    const { value } = e.target.elements.list
+    e.preventDefault();
+    const { title } = e.target.elements;
 
-    if (value.trim().length > 0)
-      createList(value)
-    e.target.elements.list.value = ""
-  }
+    if (title.value.trim().length > 0) {
+      createList({ title: title.value });
+    }
+  };
+
   return (
-    <div>
-      <h2>All Lists</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="list" type="text"/>
-        <button type="submit">Create list</button>
-      </form>
-      {
-        allIds.map( id => 
-        <div key={id}>
-          <Link 
-            to={`/lists/${id}`}>
-              {byId[id].name}
-          </Link>         
-        </div>)
-      }
-    </div>
-  )
-}
+    <section className="container section">
+      <nav className="panel">
+        <p className="panel-heading">Lists</p>
+        <div className="panel-block section">
+          <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+            <div className="field has-addons">
+              <div className="control is-expanded">
+                <input
+                  className="input"
+                  name="title"
+                  type="text"
+                  placeholder="New list name"
+                />
+              </div>
+              <div className="control">
+                <button className="button is-primary" type="submit">
+                  Create list
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        {allIds.map(id => (
+          <div key={id} className="panel-block">
+            <span className="panel-icon">
+              <i className={`fas fa-${byId[id].icon}`} aria-hidden="true" />
+            </span>
+            <Link
+              to={`/lists/${id}`}
+              style={{
+                padding: "1rem",
+                flex: "1",
+                color: "#333"
+              }}
+            >
+              <div>{byId[id].title}</div>
+            </Link>
+            <button
+              style={{}}
+              className="button is-danger is-outlined"
+              onClick={() => deleteList(id)}
+            >
+              &times;
+            </button>
+          </div>
+        ))}
+        <div className="panel-block">
+          <button className="button is-link is-outlined is-fullwidth">
+            reset all filters
+          </button>
+        </div>
+      </nav>
+    </section>
+  );
+};
 
 ViewAllLists.propTypes = {
-  byId: PropTypes.objectOf(PropTypes.shape({
-    _id: PropTypes.string,
-    name: PropTypes.string,
-    items: PropTypes.array.isRequired
-  }).isRequired)
-  .isRequired,
+  byId: PropTypes.objectOf(
+    PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+      items: PropTypes.array.isRequired
+    }).isRequired
+  ).isRequired,
   allIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isFetching: PropTypes.bool.isRequired
-}
+  createList: PropTypes.func.isRequired,
+  deleteList: PropTypes.func.isRequired
+};
 
 ViewAllLists.defaultProps = {
   byId: {},
   allIds: [],
-  isFetching: false,
-}
-export default ViewAllLists
+  isFetching: false
+};
+export default ViewAllLists;

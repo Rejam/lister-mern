@@ -21,10 +21,10 @@ const listReducer = (state = initialState, action) => {
       };
 
     case list_actions.DELETE_LIST_SUCCESS:
-      const { [action.list._id]: toRemove, ...restOfList } = state.byId;
+      const { [action.list]: toRemove, ...restOfList } = state.byId;
       return {
         byId: restOfList,
-        allIds: state.allIds.filter(id => id !== action.list._id)
+        allIds: state.allIds.filter(id => id !== action.list)
       };
 
     case item_actions.ADD_ITEM_SUCCESS:

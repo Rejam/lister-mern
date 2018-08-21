@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const list_actions = {
   CREATE_LIST_REQUEST: "CREATE_LIST_REQUEST",
   CREATE_LIST_SUCCESS: "CREATE_LIST_SUCCESS",
@@ -22,22 +24,14 @@ const createListFailure = error => ({
   error
 });
 
-export function createList(name) {
-  return function(dispatch) {
-    dispatch(createListRequest());
+export const createList = newList => dispatch => {
+  dispatch(createListRequest());
 
-    return fetch("/lists", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name: name })
-    })
-      .then(res => res.json())
-      .then(list => dispatch(createListSuccess(list)))
-      .catch(err => dispatch(createListFailure("Unable to create list")));
-  };
-}
+  axios
+    .post("/lists", newList)
+    .then(res => dispatch(createListSuccess(res.data)))
+    .catch(err => dispatch(createListFailure("error")));
+};
 
 // Delete list action
 const deleteListRequest = id => ({
@@ -55,21 +49,11 @@ const deleteListFailure = message => ({
   message
 });
 
-export function deleteList(id, history) {
-  return function(dispatch) {
-    dispatch(deleteListRequest(id));
+export const deleteList = id => dispatch => {
+  dispatch(deleteListRequest(id));
 
-    return fetch(`/lists/${id}`, {
-      method: "DELETE",
-      body: id
-    })
-      .then(res => res.json())
-      .then(list => {
-        dispatch(deleteListSuccess(list));
-        history.push("/lists");
-      })
-      .catch(err => {
-        dispatch(deleteListFailure("Unable to delete list"));
-      });
-  };
-}
+  return axios
+    .delete(`/lists/${id}`, id)
+    .then(list => dispatch(deleteListSuccess(id)))
+    .catch(err => dispatch(deleteListFailure("Unable to delete list")));
+};
