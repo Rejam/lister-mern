@@ -1,27 +1,20 @@
-import { connect } from 'react-redux'
-import ViewList from '../components/ViewList'
-import { deleteList } from '../actions/list_actions'
-import { withRouter } from 'react-router-dom'
+import ViewList from "../components/ViewList";
+import { connect } from "react-redux";
+import { deleteList } from "../actions/list_actions";
+import { addItem } from "../actions/item_actions";
+import { withRouter } from "react-router-dom";
+import { listSelector } from "../reducers/listReducer";
 
 const mapStateToProps = (state, ownProps) => {
-  const {id} = ownProps.match.params
-  const list = state.lists.byId[id]
+  const { id } = ownProps.match.params;
   return {
-      name: list ? list.name : '',
-      items: list ? list.items : [],
-    }
-}
+    list: listSelector(state, id)
+  };
+};
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const {id} = ownProps.match.params
-  return {
-    deleteList: () => {
-      dispatch(deleteList(id))
-      .then(()=> ownProps.history.push('/lists'))
-    }
-  }
-}
+const List = connect(
+  mapStateToProps,
+  { deleteList, addItem }
+)(withRouter(ViewList));
 
-const List = connect(mapStateToProps, mapDispatchToProps)(ViewList)
-
-export default withRouter(List)
+export default List;

@@ -1,36 +1,39 @@
-import React from 'react'
+import React from "react";
 import PropTypes from "prop-types";
 
-const ViewList = ({name, items, deleteList}) =>
-  <div>
-  {
-    !name ?
-    <p>List not found</p> :    
+const ViewList = props => {
+  const { list, addItem, deleteList, history } = props;
+  const { id } = props.match.params;
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const { value } = e.target.elements.newitem;
+    addItem(value, id);
+  };
+  return (
     <div>
-      <h3>{ name }</h3>
-      {
-        items.map(i => 
-          <div key={i._id}>
-            {i.name}
-          </div>
-        )
-      }
-      <button onClick={deleteList}>Delete List</button>
+      {!list ? (
+        <p>List not found</p>
+      ) : (
+        <div>
+          <h3>{list.name}</h3>
+          <form action="" onSubmit={handleSubmit}>
+            <input type="text" name="newitem" placeholder="New item" />
+            <button type="submit">Add item</button>
+          </form>
+          {list.items.map(i => (
+            <div key={i._id}>{i.name}</div>
+          ))}
+          <button onClick={() => deleteList(id, history)}>Delete List</button>
+        </div>
+      )}
     </div>
-  }
-  </div>
+  );
+};
 
 ViewList.propTypes = {
-  name: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  })).isRequired,
-}
+  addItem: PropTypes.func.isRequired,
+  list: PropTypes.object
+};
 
-ViewList.defaultProps = {
-  name: '',
-  items: [],
-}
-
-export default ViewList
+export default ViewList;
